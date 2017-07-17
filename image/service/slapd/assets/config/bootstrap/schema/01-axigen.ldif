@@ -1,0 +1,1170 @@
+#
+# Axigen Messaging
+# LDAP schema definitions
+#
+# Requires:
+# - for OpenLDAP: {core,cosine,inetorgperson,misc}.schema
+#
+dn: cn=axigen,cn=schema,cn=config
+objectClass: olcSchemaConfig
+cn: axigen
+#
+# OID suffix assigned by IANA to Axigen Messaging: 29463
+# iso.org.dod.internet.private.enterprise.Axigen_Messaging
+olcObjectIdentifier: axigenOid               1.3.6.1.4.1.29463
+olcObjectIdentifier: axigenSNMPOid           axigenOid:1
+olcObjectIdentifier: axigenLDAPOid           axigenOid:2
+#
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.5
+    NAME 'axiAliases'
+    DESC 'The account alias names of an Axigen object within an Axigen Domain.'
+    SUP uid
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.11
+    NAME 'axiUserClass'
+    DESC 'The given name of an Axigen Account Class Object.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.12
+    NAME 'axiHost'
+    DESC 'The hostname (IP or literal) that hosts the Axigen account object.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.6
+    NAME 'axiNickName'
+    DESC 'Nickname (Personal Information) of an Axigen account.'
+    SUP name
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.7
+    NAME 'axiPersonalEmail'
+    DESC 'Personal email address (Personal Information) of an Axigen account.'
+    SUP mail
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.8
+    NAME 'axiBusinessEmail'
+    DESC 'Business email address (Personal Information) of an Axigen account.'
+    SUP mail
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.9
+    NAME 'axiBusinessPhone'
+    DESC 'Business telephone number (Personal Information) of an Axigen account.'
+    SUP telephoneNumber
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.10
+    NAME 'axiBusinessAddress'
+    DESC 'Business postal address (Personal Information) of an Axigen account.'
+    SUP postalAddress
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.161
+    NAME 'axiPersonalVoIPAddress'
+    DESC 'VoIP address (Personal Information) of an Axigen account.'
+    SUP mail
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.162
+    NAME 'axiBirthday'
+    DESC 'Birthday for account owner.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.163
+    NAME 'axiSpouseName'
+    DESC 'Spouse name.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.164
+    NAME 'axiBusinessVoIPAddress'
+    DESC 'VoIP address (Business Information) of an Axigen account.'
+    SUP mail
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.165
+    NAME 'axiCompany'
+    DESC 'Company'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.166
+    NAME 'axiDepartment'
+    DESC 'Department in the company.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.168
+    NAME 'axiPosition'
+    DESC 'Job position.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.169
+    NAME 'axiProfession'
+    DESC 'Profession.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.170
+    NAME 'axiManagerName'
+    DESC 'Name of the manager.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.171
+    NAME 'axiAssistantName'
+    DESC 'Name of the assistant.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.172
+    NAME 'axiWebsite'
+    DESC 'Personal Website'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.173
+    NAME 'axiYahooMessengerId'
+    DESC 'Yahoo messenger ID.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.174
+    NAME 'axiGoogleTalkId'
+    DESC 'Google Talk ID.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.175
+    NAME 'axiLiveMessengerAddress'
+    DESC 'Live Messenger Address.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.176
+    NAME 'axiIcqNumber'
+    DESC 'Icq Number.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.177
+    NAME 'axiAolScreenName'
+    DESC 'Aol Screen Name.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.178
+    NAME 'axiSkypeId'
+    DESC 'Skype ID.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.179
+    NAME 'axiTitle'
+    DESC 'Title'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.180
+    NAME 'axiMiddleName'
+    DESC 'Middle Name'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.181
+    NAME 'axiSuffix'
+    DESC 'Name suffix'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.182
+    NAME 'axiBusinessFax'
+    DESC 'Business fax'
+    SUP telephoneNumber
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.183
+    NAME 'axiContactNotes'
+    DESC 'Notes'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.200
+    NAME 'axiLanguage'
+    DESC 'Text string indicating (in English) a language'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.201
+    NAME 'axiTimezone'
+    DESC 'Text string indicating (in English) a time-zone'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.202
+    NAME 'axiDateFormat'
+    DESC 'Date format template string containing placeholders: y(year), m(month), d(day), w(week-day)'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.203
+    NAME 'axiTimeFormat'
+    DESC 'Time format template string containing placeholders: h(hour), m(minute), s(second)'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.204
+    NAME 'axiWeekStartDay'
+    DESC 'Integer value corresponding to a week-start day: 0(Sunday), 1(Monday), 2(Tuesday), 3(Wednesday), 4(Thursday), 5(Friday), 6(Saturday)'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.205
+    NAME 'axiWorkingDays'
+    DESC 'Integer bit-mask value corresponding to a set of working days: 1(Sunday), 2(Monday), 4(Tuesday), 8(Wednesday), 16(Thursday), 32(Friday), 64(Saturday)'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.206
+    NAME 'axiStartWorkingTime'
+    DESC 'String value indicating a start working time with format hh:mm[:ss]'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.207
+    NAME 'axiEndWorkingTime'
+    DESC 'String value indicating a end working time with format hh:mm[:ss]'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.208
+    NAME 'axiFilteringOption'
+    DESC 'Integer value indicating a filtering option: 0(disabled), 1(enabled), 2(enabled with IC)'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.209
+    NAME 'axiSignature'
+    DESC 'User email signature'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.32
+    NAME 'axiServices'
+    DESC 'The list of Axigen email services enabled for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.34
+    NAME 'axiPOP3ConnectionCount'
+    DESC 'Maximum number of simultaneous POP3 connections allowed for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.36
+    NAME 'axiIMAPConnectionCount'
+    DESC 'Maximum number of simultaneous IMAP connections allowed for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.38
+    NAME 'axiWebmailSessionCount'
+    DESC 'Maximum number of simultaneous Webmail sessions allowed for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.40
+    NAME 'axiSentMessagesSize'
+    DESC 'The maximum allowed size(KB)of individual messages sent by an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.42
+    NAME 'axiSentMessagesCount'
+    DESC 'Maximum number of allowed messages sent in a specified interval (seconds) by an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.44
+    NAME 'axiSentMessagesInterval'
+    DESC 'The interval (seconds) in which message delivery rules are applied for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.46
+    NAME 'axiRPOPConnectionCount'
+    DESC 'Maximum number of the RPOP accounts that can be configured and polled by an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.48
+    NAME 'axiRPOPRetrievalInterval'
+    DESC 'The minimum interval (minutes) between two RPOP account polls bt the Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.50
+    NAME 'axiWebmailRcptCount'
+    DESC 'The maximum number of recipients each message sent from the Webmail by an Axigen account can have. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.52
+    NAME 'axiWebmailAttSize'
+    DESC 'The maximum attachment size (KB)allowed for messages sent by an Axigen account using the Webmail. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.54
+    NAME 'axiWebmailAttCount'
+    DESC 'The maximum number of allowed attachments for messages sent using the Webmail by an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.56
+    NAME 'axiWebmailMessageSize'
+    DESC 'The maximum mail size (KB)allowed for messages sent using the Webmail interface by an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.58
+    NAME 'axiPasswordEnforcementEnabled'
+    DESC 'Specifies if password enforcement policies are active for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.60
+    NAME 'axiMinimumPasswordLength'
+    DESC 'Specifies the minimum enforced password length for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.62
+    NAME 'axiMaximumPasswordLength'
+    DESC 'Specifies the maximum enforced password length for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.64
+    NAME 'axiRequiredPasswordCharacters'
+    DESC 'Specifies the mandatory combination of character types required for passwords of an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.66
+    NAME 'axiHTMLFilterLevel'
+    DESC 'Specifies te level of HTML filtering applied within the Webmail interface for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.68
+    NAME 'axiTemporaryAliasesCount'
+    DESC 'The maximum number of temporary email addresses that can be created by an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.70
+    NAME 'axiTemporaryAliasesInterval'
+    DESC 'The maximum lifespan of a temporary email address created by an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.72
+    NAME 'axiEnableActiveSync'
+    DESC 'Specifies if the ActiveSync functionality is enabled for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.74
+    NAME 'axiActiveSyncOptions'
+    DESC 'The ActiveSync options and sync actions allowed for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.108
+    NAME 'axiEnableOutlookConnector'
+    DESC 'Specifies if the Outlook Connector functionality is enabled for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.110
+    NAME 'axiEnableWebPersonalOrganizer'
+    DESC 'Specifies if the Web Personal Organizer functionality is enabled for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.185
+    NAME 'axiEnableSharing'
+    DESC 'Specifies if the sharing is enabled for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.186
+    NAME 'axiEnableKAV'
+    DESC 'Specifies if the KAV filtering is enabled for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.187
+    NAME 'axiEnableKAS'
+    DESC 'Specifies if the KAS filtering is enabled for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.218
+    NAME 'axiEnableIA'
+    DESC 'Specifies if the IA filtering is enabled for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.130
+    NAME 'axiPassExpirationEnabled'
+    DESC 'Switch for enabling the password expiration.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.132
+    NAME 'axiPassExpirationInterval'
+    DESC 'The interval of time in days that may pass from the moment the password was changed until the moment it expires and can not be used.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.134
+    NAME 'axiPassRenewalInterval'
+    DESC 'The interval of time that must pass from the moment of the last change of the password until a new change can be performed.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.136
+    NAME 'axiPassExpirationWarningEnabled'
+    DESC 'Switch for enabling the sending of a warning message in case of password expiration.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.138
+    NAME 'axiPassExpirationWarningInterval'
+    DESC 'The interval of time that must pass until warning password expiration messages are sent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.140
+    NAME 'axiPassExpirationWarningSentDaily'
+    DESC 'Switch for the password expiration warning to be sent every day during the expiration warning interval.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.142
+    NAME 'axiPassExpirationWarningSubject'
+    DESC 'The subject template of the email message sent as warning for password expiration.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.144
+    NAME 'axiPassExpirationWarningBody'
+    DESC 'The body template of the email message sent as warning for password expiration.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.192
+    NAME 'axiPassExpirationWarningFileName'
+    DESC 'File name containing password expiration warning message template.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.146
+    NAME 'axiPassHistorySize'
+    DESC 'The number of consecutive changed passwords that can not be used as new password when a change of password is performed.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.148
+    NAME 'axiPassUnchangeable'
+    DESC 'The capability for an user to change his/her password.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.150
+    NAME 'axiWelcomeMessageEnabled'
+    DESC 'switch for enabling the post of a welcome message in an accounts mailbox.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.152
+    NAME 'axiWelcomeMessageSubject'
+    DESC 'The subject template of the email message sent as welcome message.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.154
+    NAME 'axiWelcomeMessageBody'
+    DESC 'The body template of the email message sent as welcome message.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.190
+    NAME 'axiWelcomeMessageFileName'
+    DESC 'File name containing welcome message template.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.155
+    NAME 'axiAllowIdentityConfirmation'
+    DESC 'Switch for enabling the use of the Identity Confirmation feature by a user.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.157
+    NAME 'axiEditableContactInfo'
+    DESC 'Allow modifcation of user personal contact information from his account'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.184
+    NAME 'axiEnableAutoMigration'
+    DESC 'If true account is migrated automatically on first login'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.212
+    NAME 'axiSentRecipientsCount'
+    DESC 'Maximum number of recipients a user can send to in a specified interval (seconds). Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.213
+    NAME 'axiSentOverquotaFileName'
+    DESC 'Path to file containing template of sent overquota notification. Inherited if absent. Default value: sent_overquota.eml'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.214
+    NAME 'axiSentOverquotaEmailAddress'
+    DESC 'Email address where sent overquota notification emails will be sent. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.217
+    NAME 'axiSentOverquotaEmailAddressInherited'
+    DESC 'The inherited status of email address where sent overquota notification emails will be sent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.215
+    NAME 'axiSentRecipientsExceptions'
+    DESC 'List of recipients to which the user is allowed to send email even if sent quota is exceeded. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.216
+    NAME 'axiSentRecipientsExceptionsInherited'
+    DESC 'The inherited exceptions that apply to message sending quotas defined for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.219
+    NAME 'axiPasswordRecoveryMethods'
+    DESC 'Methods allowed for user password recovery. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.220
+    NAME 'axiUsernameRecoveryMethods'
+    DESC 'Methods allowed for user name recovery. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.221
+    NAME 'axiPeaPasswordRecoveryFileName'
+    DESC 'Path to file containing template of pea-based password recovery email. Inherited if absent. Default value: password_recovery.eml'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.222
+    NAME 'axiPeaUsernameRecoveryFileName'
+    DESC 'Path to file containing template of pea-based username recovery email. Inherited if absent. Default value: username_recovery.eml'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.223
+    NAME 'axiRelatedAttachments'
+    DESC 'Allows the display of all attachments in a multipart/related mime.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.224
+    NAME 'axiEnableCalAvailabilitySharing'
+    DESC 'Enable calendar availability sharing for users in this domain. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.225
+    NAME 'axiEnableCalAvailabilitySharingInherited'
+    DESC 'Enable calendar availability sharing for users in this domain. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.226
+    NAME 'axiArchivingPolicy'
+    DESC 'Configure the behaviour of the archiving feature.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.227
+    NAME 'axiArchivingPolicyInherited'
+    DESC 'Configure the behaviour of the archiving feature. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.228
+    NAME 'axiLocalizedImapFolderNames'
+    DESC 'Enable localized IMAP folder names'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.229
+    NAME 'axiLocalizedImapFolderNamesInherited'
+    DESC 'Enable localized IMAP folder names. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.76
+    NAME 'axiTotalMessageSize'
+    DESC 'The maximum allowed size (KB)of all messages stored inside an Axigen account (quota). Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.78
+    NAME 'axiTotalMessageCount'
+    DESC 'The maximum number of messages that can be stored inside an Axigen account mailbox. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.80
+    NAME 'axiMboxCount'
+    DESC 'The maximum number of folders and subfolders an Axigen account can create and use. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.82
+    NAME 'axiMessageSize'
+    DESC 'The maximum allowed size (KB)of all messages stored inside an Axigen account folder (quota). Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.84
+    NAME 'axiMessageCount'
+    DESC 'The maximum number of messages each folder can store within an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.86
+    NAME 'axiQuotaLimitNotificationEnabled'
+    DESC 'Specifies if a quota limit notification will be sent to an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.88
+    NAME 'axiQuotaLimitThreshold'
+    DESC 'The quota level that must be reached before a notification is sent to an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.90
+    NAME 'axiQuotaLimitNotificationInterval'
+    DESC 'The minimum time interval (minutes) that must pass between subsequent quota notifications for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.92
+    NAME 'axiQuotaLimitNotificationSubject'
+    DESC 'The subject of the quota notification message sent to an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.94
+    NAME 'axiQuotaLimitNotificationBody'
+    DESC 'The body of the quota notification message sent to an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.191
+    NAME 'axiQuotaLimitNotificationFileName'
+    DESC 'Name of file containing quota limit notification template.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.156
+    NAME 'axiQuotaSendMessageThreshold'
+    DESC 'Percent of quota which triggers blocking of message sending.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.210
+    NAME 'axiFilteredEmailSizeQuota'
+    DESC 'The maximum allowed size (KB)of all messages stored inside Filtered Email folder. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.211
+    NAME 'axiFilteredEmailCountQuota'
+    DESC 'The maximum number of messages that can be stored inside Filtered Email folder. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.96
+    NAME 'axiEnableSendRestrictions'
+    DESC 'Specifies if send restrictions are enabled for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.98
+    NAME 'axiSendPolicy'
+    DESC 'The policies enabled for messages sent by an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.100
+    NAME 'axiSendPolicyExceptions'
+    DESC 'The exceptions that apply to message sending policies defined for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.101
+    NAME 'axiSendPolicyExceptionsInherited'
+    DESC 'The inherited exceptions that apply to message sending policies defined for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.102
+    NAME 'axiEnableRecvRestrictions'
+    DESC 'Specifies if receive restrictions are enabled for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.104
+    NAME 'axiRecvPolicy'
+    DESC 'The policies enabled for messages received by an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.27
+    EQUALITY integerMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.106
+    NAME 'axiRecvPolicyExceptions'
+    DESC 'The exceptions that apply to message receiving  policies defined for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.107
+    NAME 'axiRecvPolicyExceptionsInherited'
+    DESC 'The inherited exceptions that apply to message receiving policies defined for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.112
+    NAME 'axiEnableTopBanner'
+    DESC 'Specifies if the top banner of webmail advertising is enabled for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.114
+    NAME 'axiTopBannerContent'
+    DESC 'Specifies the content of the top banner of webmail advertising for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.116
+    NAME 'axiEnableRightBanner'
+    DESC 'Specifies if the right-side banner of webmail advertising is enabled for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.118
+    NAME 'axiRightBannerContent'
+    DESC 'Specifies the content of the right-side banner of webmail advertising for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.120
+    NAME 'axiEnableBottomBanner'
+    DESC 'Specifies if the bottom banner of webmail advertising is enabled for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.122
+    NAME 'axiBottomBannerContent'
+    DESC 'Specifies the content of the bottom banner of webmail advertising for an Axigen account. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+    EQUALITY caseIgnoreMatch
+    SUBSTR caseIgnoreSubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.128
+    NAME 'axiSMTPEnabled'
+    DESC 'Specifies if access to the SMTP services are enabled for an Axigen group. Inherited if absent.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.7
+    EQUALITY booleanMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.189
+    NAME 'axiAliasedDomainName'
+    DESC 'The domain name defined on an entry associated with an Axigen Domain.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    SINGLE-VALUE
+    )
+olcAttributeTypes: ( 1.3.6.1.4.1.29463.2.3.193
+    NAME 'axiDelegates'
+    DESC 'List of strings defining delegates for the account. Syntax of each string is uid:rights.'
+    SYNTAX 1.3.6.1.4.1.1466.115.121.1.26
+    EQUALITY caseIgnoreIA5Match
+    SUBSTR caseIgnoreIA5SubstringsMatch
+    )
+olcObjectClasses: ( 1.3.6.1.4.1.29463.2.4.2
+    NAME 'axiAccount'
+    DESC 'An account object within an Axigen domain'
+    SUP top AUXILIARY
+    MUST (
+        uid
+        )
+    MAY (
+        userPassword $
+        axiAliases $
+        axiUserClass $
+        axiHost $
+        mailHost $
+        cn $
+        givenName $
+        sn $
+        axiNickName $
+        mail $
+        axiPersonalEmail $
+        axiBusinessEmail $
+        telephoneNumber $
+        mobile $
+        homePhone $
+        axiBusinessPhone $
+        homePostalAddress $
+        axiBusinessAddress $
+        jpegPhoto $
+        axiPersonalVoIPAddress $
+        axiBirthday $
+        axiSpouseName $
+        axiBusinessVoIPAddress $
+        axiCompany $
+        axiDepartment $
+        physicalDeliveryOfficeName $
+        axiPosition $
+        axiProfession $
+        axiManagerName $
+        axiAssistantName $
+        axiWebsite $
+        axiYahooMessengerId $
+        axiGoogleTalkId $
+        axiLiveMessengerAddress $
+        axiIcqNumber $
+        axiAolScreenName $
+        axiSkypeId $
+        axiTitle $
+        axiMiddleName $
+        axiSuffix $
+        axiBusinessFax $
+        axiContactNotes $
+        axiLanguage $
+        axiTimezone $
+        axiDateFormat $
+        axiTimeFormat $
+        axiWeekStartDay $
+        axiWorkingDays $
+        axiStartWorkingTime $
+        axiEndWorkingTime $
+        axiFilteringOption $
+        axiSignature $
+        axiServices $
+        axiPOP3ConnectionCount $
+        axiIMAPConnectionCount $
+        axiWebmailSessionCount $
+        axiSentMessagesSize $
+        axiSentMessagesCount $
+        axiSentMessagesInterval $
+        axiRPOPConnectionCount $
+        axiRPOPRetrievalInterval $
+        axiWebmailRcptCount $
+        axiWebmailAttSize $
+        axiWebmailAttCount $
+        axiWebmailMessageSize $
+        axiPasswordEnforcementEnabled $
+        axiMinimumPasswordLength $
+        axiMaximumPasswordLength $
+        axiRequiredPasswordCharacters $
+        axiHTMLFilterLevel $
+        axiTemporaryAliasesCount $
+        axiTemporaryAliasesInterval $
+        axiEnableActiveSync $
+        axiActiveSyncOptions $
+        axiEnableOutlookConnector $
+        axiEnableWebPersonalOrganizer $
+        axiEnableSharing $
+        axiEnableKAV $
+        axiEnableKAS $
+        axiEnableIA $
+        axiPassExpirationEnabled $
+        axiPassExpirationInterval $
+        axiPassRenewalInterval $
+        axiPassExpirationWarningEnabled $
+        axiPassExpirationWarningInterval $
+        axiPassExpirationWarningSentDaily $
+        axiPassExpirationWarningSubject $
+        axiPassExpirationWarningBody $
+        axiPassExpirationWarningFileName $
+        axiPassHistorySize $
+        axiPassUnchangeable $
+        axiWelcomeMessageEnabled $
+        axiWelcomeMessageSubject $
+        axiWelcomeMessageBody $
+        axiWelcomeMessageFileName $
+        axiAllowIdentityConfirmation $
+        axiEditableContactInfo $
+        axiEnableAutoMigration $
+        axiSentRecipientsCount $
+        axiSentOverquotaFileName $
+        axiSentOverquotaEmailAddress $
+        axiSentOverquotaEmailAddressInherited $
+        axiSentRecipientsExceptions $
+        axiSentRecipientsExceptionsInherited $
+        axiPasswordRecoveryMethods $
+        axiUsernameRecoveryMethods $
+        axiPeaPasswordRecoveryFileName $
+        axiPeaUsernameRecoveryFileName $
+        axiRelatedAttachments $
+        axiEnableCalAvailabilitySharing $
+        axiEnableCalAvailabilitySharingInherited $
+        axiTotalMessageSize $
+        axiTotalMessageCount $
+        axiMboxCount $
+        axiMessageSize $
+        axiMessageCount $
+        axiQuotaLimitNotificationEnabled $
+        axiQuotaLimitThreshold $
+        axiQuotaLimitNotificationInterval $
+        axiQuotaLimitNotificationSubject $
+        axiQuotaLimitNotificationBody $
+        axiQuotaLimitNotificationFileName $
+        axiQuotaSendMessageThreshold $
+        axiFilteredEmailSizeQuota $
+        axiFilteredEmailCountQuota $
+        axiEnableSendRestrictions $
+        axiSendPolicy $
+        axiSendPolicyExceptions $
+        axiSendPolicyExceptionsInherited $
+        axiEnableRecvRestrictions $
+        axiRecvPolicy $
+        axiRecvPolicyExceptions $
+        axiRecvPolicyExceptionsInherited $
+        axiEnableTopBanner $
+        axiTopBannerContent $
+        axiEnableRightBanner $
+        axiRightBannerContent $
+        axiEnableBottomBanner $
+        axiBottomBannerContent $
+        axiDelegates $
+        axiArchivingPolicy $
+        axiArchivingPolicyInherited $
+        axiLocalizedImapFolderNames $
+        axiLocalizedImapFolderNamesInherited
+        )
+    )
+olcObjectClasses: ( 1.3.6.1.4.1.29463.2.4.3
+    NAME 'axiGroup'
+    DESC 'A group object created within an Axigen domain'
+    SUP top AUXILIARY
+    MUST (
+        cn
+        )
+    MAY (
+        member $
+        mailLocalAddress $
+        axiHost $
+        mailHost $
+        axiSMTPEnabled
+        )
+    )
+olcObjectClasses: ( 1.3.6.1.4.1.29463.2.4.188
+    NAME 'axiDomainAlias'
+    DESC 'An entry associated with an Axigen domain'
+    SUP top AUXILIARY
+    MUST (
+        axiAliasedDomainName
+        )
+    MAY (
+        )
+    )
+
